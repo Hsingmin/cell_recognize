@@ -3,6 +3,10 @@ __pycache__/
 *.py[cod]
 *$py.class
 
+# Special files for model
+keras_yolov3/yolov3.weights
+keras_yolov3/model_data/yolo.h5
+
 # C extensions
 *.so
 
