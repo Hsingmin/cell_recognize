@@ -1,14 +1,7 @@
 # -*- coding: utf-8 -*-
 """
-Created on Mon Apr  8 15:46:40 2019
-
-@author: hit
-
-2019.4.9 
-该文件用来将xml文件中的有用信息提取出来，然后再转换为txt文件，然后该txt文件后续会被
-用在神经网络的训练中
-
-
+extract usefull information from xml file and converting into
+.txt for training process
 """
 
 import os
@@ -57,7 +50,7 @@ def trans_annototxt_wyk(anno_dir, img_dir):
     f.close()
 
 
-anno_dir = "/home/xingmin/workspace/YOLO/YOLOV3-detecting-red-blood-cell/dataset/Annotations/"
-img_dir = "/home/xingmin/workspace/YOLO/YOLOV3-detecting-red-blood-cell/dataset/JPEGImages/"
+anno_dir = "../dataset/redcell/Annotations/"
+img_dir = "../dataset/redcell/JPEGImages/"
 
 trans_annototxt_wyk(anno_dir, img_dir)

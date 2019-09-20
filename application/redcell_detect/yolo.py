@@ -19,9 +19,28 @@ import os
 from keras.utils import multi_gpu_model
 
 
+class DetectedRes(object):
+    def __init__(self):
+        self.image = None
+        self.boxes = []
+
+    def set_image(self, img):
+        self.image = img
+
+    def get_image(self):
+        return self.image
+
+    def append_box(self, label, lt, rb):
+        self.boxes.append(dict(
+            {"label": label, "left_top_coordinate": lt, "right_bottom_coordinate": rb}))
+
+    def get_boxes(self):
+        return self.boxes
+
+
 class YOLO(object):
     _defaults = {
-        "model_path": '/home/xingmin/workspace/YOLO/YOLOV3-detecting-red-blood-cell/yolov3_detecting_redcell/logs_redcell/trained_weights_final_pre.h5',
+        "model_path": 'logs_redcell/trained_weights_final_pre.h5',
         "anchors_path": 'model_data/yolo_anchors.txt',
         "classes_path": 'model_data/redcell_classes.txt',
         "score": 0.3,
@@ -131,6 +150,7 @@ class YOLO(object):
             })
 
         print('Found {} boxes for {}'.format(len(out_boxes), 'img'))
+        detected_res = DetectedRes()
 
         font = ImageFont.truetype(font='font/FiraMono-Medium.otf',
                                   size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
@@ -151,6 +171,7 @@ class YOLO(object):
             bottom = min(image.size[1], np.floor(bottom + 0.5).astype('int32'))
             right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
             print(label, (left, top), (right, bottom))
+            detected_res.append_box(label, (left, top), (right, bottom))
 
             if top - label_size[1] >= 0:
                 text_origin = np.array([left, top - label_size[1]])
@@ -170,7 +191,8 @@ class YOLO(object):
 
         end = timer()
         print(end - start)
-        return image
+        detected_res.set_image(image)
+        return detected_res
 
     def close_session(self):
         self.sess.close()
