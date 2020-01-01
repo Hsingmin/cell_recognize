@@ -4,8 +4,9 @@ from yolo import YOLO
 from PIL import Image
 
 
-def detect_img(yolo, img):
+def detect_img(img):
     # img = input('Input image filename:')
+    yolo = YOLO()
     try:
         image = Image.open(img)
     except:
@@ -22,4 +23,4 @@ def detect_img(yolo, img):
 
 if __name__ == '__main__':
     img_name = "BloodImage_00003.jpg"
-    detect_img(YOLO(), img_name)
+    detect_img(img_name)
