@@ -12,6 +12,6 @@ Use this dataset the train a demo to recognize red-blood-cell, and changed to ad
 to re-train the model in the future if the dataset is ready.
 
 How to get the result of detecting:
-1. In application/redcell_detect/, python3 yolo_video.py --image;
-2. Enter the blood cell image you want to detect, i.g. "Bloodimage_00003.jpg";
-3. It will show you detected result and returns the bounding-box; 
+1. In application/redcell_detect/, python3 redcell_detect.py;
+2. The red blood cell image is specified to "Bloodimage_00003.jpg" just for demo;
+3. We will integrate redcell_detect.py into a service; 
